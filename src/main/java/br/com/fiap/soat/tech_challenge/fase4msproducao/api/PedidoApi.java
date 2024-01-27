@@ -3,6 +3,7 @@ package br.com.fiap.soat.tech_challenge.fase4msproducao.api;
 import java.util.List;
 import java.util.UUID;
 
+import br.com.fiap.soat.tech_challenge.fase4msproducao.api.requests.PedidoRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,10 @@ public class PedidoApi {
         this.pedidoController = pedidoController;
     }
 
+    public ResponseEntity<PedidoPresenter> criarPedido(PedidoRequest pedidoRequest) {
+        return ResponseEntity.ok(pedidoController.criarPedido(pedidoRequest.toDomain());
+    }
+    
     @Operation(summary = "Obter pedidos", description = "Retorna uma lista de pedidos, opcionalmente filtrada por status.")
     @GetMapping("/pedidos")
     public ResponseEntity<List<PedidoPresenter>> obterPedidos(

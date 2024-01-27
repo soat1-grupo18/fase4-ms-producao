@@ -41,4 +41,9 @@ public class PedidoController {
         Pedido pedido = atualizarStatusPedidoUseCase.execute(pedidoId, statusDoPedido);
         return PedidoPresenter.fromDomain(pedido);
     }
+
+    public PedidoPresenter criarPedido(Pedido pedido) {
+        // TODO: criar pedido
+        return PedidoPresenter.fromDomain(pedido);
+    }
 }
