@@ -5,40 +5,36 @@ import br.com.fiap.soat.tech_challenge.fase4msproducao.entities.StatusDoPagament
 import br.com.fiap.soat.tech_challenge.fase4msproducao.entities.StatusDoPedido;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class PedidoRequest {
+public class PedidoEmProducaoRequest {
 
-    private UUID id;
+    private UUID pedidoId;
 
     private UUID clienteId;
 
     private BigDecimal preco;
 
-    private List<ItemDoPedidoRequest> itens;
+    private List<ItemDoPedidoEmProducaoRequest> itens;
 
-    private LocalDateTime dataDeCriacao;
-
-    public List<ItemDoPedidoRequest> getItens() {
+    public List<ItemDoPedidoEmProducaoRequest> getItens() {
         return itens;
     }
 
 
     public Pedido toDomain() {
         return new Pedido(
-                id,
+                null,
+                pedidoId,
                 clienteId,
                 preco,
                 StatusDoPedido.RECEBIDO,
                 StatusDoPagamento.PENDENTE,
-                itens.stream().map(item -> item.toDomain()).collect(Collectors.toList()),
+                itens.stream().map(ItemDoPedidoEmProducaoRequest::toDomain).collect(Collectors.toList()),
                 null,
-                dataDeCriacao);
+                LocalDateTime.now());
     }
 }

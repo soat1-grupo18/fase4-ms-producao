@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import br.com.fiap.soat.tech_challenge.fase4msproducao.interfaces.usecases.CriarPedidoEmProducaoUseCasePort;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.soat.tech_challenge.fase4msproducao.entities.Pedido;
@@ -18,13 +19,16 @@ public class PedidoController {
     private final ObterTodosPedidosUseCasePort obterTodosPedidosUseCase;
     private final ObterPedidosPorStatusUseCasePort obterPedidosPorStatusUseCase;
     private final AtualizarStatusPedidoUseCasePort atualizarStatusPedidoUseCase;
+    private final CriarPedidoEmProducaoUseCasePort criarPedidoEmProducaoUseCase;
 
     public PedidoController(ObterTodosPedidosUseCasePort obterTodosPedidosUseCase,
-            ObterPedidosPorStatusUseCasePort obterPedidosPorStatusUseCase,
-            AtualizarStatusPedidoUseCasePort atualizarStatusPedidoUseCase) {
+                            ObterPedidosPorStatusUseCasePort obterPedidosPorStatusUseCase,
+                            AtualizarStatusPedidoUseCasePort atualizarStatusPedidoUseCase,
+                            CriarPedidoEmProducaoUseCasePort criarPedidoEmProducaoUseCase) {
         this.obterTodosPedidosUseCase = obterTodosPedidosUseCase;
         this.obterPedidosPorStatusUseCase = obterPedidosPorStatusUseCase;
         this.atualizarStatusPedidoUseCase = atualizarStatusPedidoUseCase;
+        this.criarPedidoEmProducaoUseCase = criarPedidoEmProducaoUseCase;
     }
 
     public List<PedidoPresenter> obterTodosPedidos() {
@@ -42,8 +46,8 @@ public class PedidoController {
         return PedidoPresenter.fromDomain(pedido);
     }
 
-    public PedidoPresenter criarPedido(Pedido pedido) {
-        // TODO: criar pedido
+    public PedidoPresenter criarPedidoEmProducao(Pedido pedido) {
+        var pedidoEmProducao = criarPedidoEmProducaoUseCase.execute(pedido);
         return PedidoPresenter.fromDomain(pedido);
     }
 }
