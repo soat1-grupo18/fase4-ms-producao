@@ -5,11 +5,7 @@ import java.util.UUID;
 
 import br.com.fiap.soat.tech_challenge.fase4msproducao.api.requests.PedidoEmProducaoRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 
 import br.com.fiap.soat.tech_challenge.fase4msproducao.controllers.PedidoController;
@@ -25,7 +21,9 @@ public class PedidoApi {
         this.pedidoController = pedidoController;
     }
 
-    public ResponseEntity<PedidoPresenter> criarPedidoEmProducao(PedidoEmProducaoRequest pedidoEmProducaoRequest) {
+    @Operation(summary = "Criar pedido em produção", description = "Cria um pedido pendente em produção, aguardando pagamento para iniciar a preparação.")
+    @PostMapping("/pedidos")
+    public ResponseEntity<PedidoPresenter> criarPedidoEmProducao(@RequestBody PedidoEmProducaoRequest pedidoEmProducaoRequest) {
         return ResponseEntity.ok(pedidoController.criarPedidoEmProducao(pedidoEmProducaoRequest.toDomain()));
     }
     

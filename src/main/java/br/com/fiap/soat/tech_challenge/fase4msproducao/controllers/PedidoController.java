@@ -48,6 +48,6 @@ public class PedidoController {
 
     public PedidoPresenter criarPedidoEmProducao(Pedido pedido) {
         var pedidoEmProducao = criarPedidoEmProducaoUseCase.execute(pedido);
-        return PedidoPresenter.fromDomain(pedido);
+        return PedidoPresenter.fromDomain(pedidoEmProducao);
     }
 }
